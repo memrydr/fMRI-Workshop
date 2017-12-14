@@ -1,0 +1,18 @@
+Level 1 analysis overview
+
+
+1. Data: Functional data and onset times.  Check that time 0 is the same in both.
+  - Take note if the number of TRs differs between your runs
+
+2. Fire up the Feat GUI and set up a single run's analysis
+  - Hipass filter cutoff = 100s
+  - If using Feat for preprocessing, go with defaults
+  - Registration - Double check skull stripping on structurals as teeny bits of skull/dura can cause issue with nonlinear registration.  Recall naming convention: same directory with originalT1.nii.gz and originalT1_brain.nii.gz
+  - Design tab. You may use add additional confound EVs as a text file.  e.g. you used fmriprep.  Use full model setup and remember to change to double gamma HRF and leave temporal derivative and temporal filtering checked
+  - post-stats:  Turn everything off.  No need to waste disc space
+ 3.  Save the setup.  I typically use "junk" as the output, then move the junk.fsf to template.fsf
+ 4. Set up your template
+  - Look for things that might change and create "flags" for the future search/replace script.  Typically: subject number, run number, number of TRs
+  5. Use the python (or some other script) to run a search/replace to generate all of the fsfs.
+  6. Run them!
+      feat design.fsf
